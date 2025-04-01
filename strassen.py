@@ -98,10 +98,10 @@ with open(filename, "r", encoding="ascii") as f:
     text=f.read()
 for i in range(n):
     for j in range(n):
-        matrix1[i,j]=strip(text[i+n*j])
+        matrix1[i,j]=text[i+n*j].strip()
 for i in range(n):
     for j in range(n):
-        matrix2[i,j]=strip(text[n**2+i+n*j])
+        matrix2[i,j]=text[n**2+i+n*j].strip()
 output=newstrassen(matrix1,matrix2,2**13)
 for i in range(n):
     print(output[i,i])
