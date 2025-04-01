@@ -84,7 +84,6 @@ matrix2=np.zeros((n,n))
 with open(filename, "r", encoding="ascii") as f:
     text=f.read()
 numbers=text.split('\n')
-print(len(numbers))
 for i in range(n):
     for j in range(n):
         matrix1[i,j]=int(numbers[i+n*j])
