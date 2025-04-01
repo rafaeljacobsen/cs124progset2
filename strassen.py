@@ -5,29 +5,14 @@ def genarraye(e):
     return np.random.choice([0,1],[e,e])
 
 def normalmult(M1, M2):
-    n, m = np.shape(M1)
-    p = np.shape(M2)[1]
-    output = np.zeros((n, p))
+    n=np.shape(M1)[0]
+    output = np.zeros((n,n))
     for i in range(n):
-        for j in range(p):
-            sumto = 0
-            for k in range(m):
-                sumto += M1[i, k] * M2[k, j]
-            output[i, j] = sumto
+        for j in range(n):
+            a=M1[i, j]
+            for k in range(n):
+                output[i, j] += a * M2[k, j]
     return output
-
-def normalmult(M1, M2):
-    n, m = np.shape(M1)
-    p = np.shape(M2)[1]
-    output = np.zeros((n, p))
-    for i in range(n):
-        for j in range(p):
-            sumto = 0
-            for k in range(m):
-                sumto += M1[i, k] * M2[k, j]
-            output[i, j] = sumto
-    return output
-
 def newstrassen(matrix1,matrix2,cutoff):
     if np.shape(matrix1)[0]==1:
         return matrix1*matrix2
