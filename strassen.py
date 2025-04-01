@@ -4,6 +4,7 @@ import sys
 def genarraye(e):
     return np.random.choice([0,1],[e,e])
 
+
 def normalmult(M1, M2):
     n=np.shape(M1)[0]
     output = np.zeros((n,n))
@@ -11,8 +12,9 @@ def normalmult(M1, M2):
         for j in range(n):
             a=M1[i, j]
             for k in range(n):
-                output[i, j] += a * M2[k, j]
+                output[i, k] += a * M2[j, k]
     return output
+
 def newstrassen(matrix1,matrix2,cutoff):
     if np.shape(matrix1)[0]==1:
         return matrix1*matrix2
@@ -89,7 +91,11 @@ for i in range(n):
 for i in range(n):
     for j in range(n):
         matrix2[i,j]=int(numbers[n**2+i+n*j])
+#print(matrix1)
+#print(matrix2)
 output=newstrassen(matrix1,matrix2,16)
-#for i in range(n):
-#    print(int(output[i,i]))
-print(1)
+#print(output)
+
+for i in range(n):
+    print(int(output[i,i]))
+#print(1)
