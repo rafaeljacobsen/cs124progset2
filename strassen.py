@@ -104,7 +104,6 @@ for i in range(n):
 for i in range(n):
     for j in range(n):
         matrix2[i,j]=int(numbers[n**2+i+n*j])
-print(n,n**2,len(text))
 output=newstrassen(matrix1,matrix2,2**13)
 for i in range(n):
     print(output[i,i])
