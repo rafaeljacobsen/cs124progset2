@@ -1,7 +1,4 @@
 import numpy as np
-import time
-from tqdm import tqdm
-import matplotlib.pyplot as plt
 import sys
 
 def genarraye(e):
