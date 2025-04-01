@@ -106,4 +106,4 @@ for i in range(n):
         matrix2[i,j]=int(numbers[n**2+i+n*j])
 output=newstrassen(matrix1,matrix2,2**13)
 for i in range(n):
-    print(output[i,i])
+    print(int(output[i,i]))
