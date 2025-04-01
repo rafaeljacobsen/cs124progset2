@@ -15,6 +15,16 @@ def normalmult(M1, M2):
                 output[i, k] += a * M2[j, k]
     return output
 
+
+def normalmult(M1, M2):
+    n=np.shape(M1)[0]
+    output = np.zeros((n,n))
+    for i in range(n):
+        for j in range(n):
+            a=M1[i, j]
+            for k in range(n):
+                output[i, k] += a * M2[j, k]
+    return output
 def newstrassen(matrix1,matrix2,cutoff):
     if np.shape(matrix1)[0]==1:
         return matrix1*matrix2
@@ -26,8 +36,8 @@ def newstrassen(matrix1,matrix2,cutoff):
     odd=False
     if np.shape(M1)[0]%2==1:
         odd=True
-        M1=np.pad(M1,1)[1:,1:]
-        M2=np.pad(M2,1)[1:,1:]
+        M1=np.pad(M1, ((0,1), (0,1)), mode='constant')
+        M2=np.pad(M2, ((0,1), (0,1)), mode='constant')
     half=np.shape(M1)[0]//2
 
     A=M1[:half,:half]
@@ -86,15 +96,11 @@ with open(filename, "r", encoding="ascii") as f:
 numbers=text.split('\n')
 for i in range(n):
     for j in range(n):
-        matrix1[i,j]=int(numbers[i+n*j])
+        matrix1[j,i]=int(numbers[i+n*j])
 for i in range(n):
     for j in range(n):
-        matrix2[i,j]=int(numbers[n**2+i+n*j])
-#print(matrix1)
-#print(matrix2)
+        matrix2[j,i]=int(numbers[n**2+i+n*j])
 output=newstrassen(matrix1,matrix2,16)
-#print(output)
-
 for i in range(n):
     print(int(output[i,i]))
 #print(1)
