@@ -102,6 +102,7 @@ for i in range(n):
 for i in range(n):
     for j in range(n):
         matrix2[i,j]=text[n**2+i+n*j].strip()
+print(n,n**2,len(test))
 output=newstrassen(matrix1,matrix2,2**13)
 for i in range(n):
     print(output[i,i])
