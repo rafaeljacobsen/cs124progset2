@@ -100,10 +100,10 @@ numbers=text.split('\n')
 print(len(numbers))
 for i in range(n):
     for j in range(n):
-        matrix1[i,j]=numbers[i+n*j]
+        matrix1[i,j]=int(numbers[i+n*j])
 for i in range(n):
     for j in range(n):
-        matrix2[i,j]=numbers[n**2+i+n*j]
+        matrix2[i,j]=int(numbers[n**2+i+n*j])
 print(n,n**2,len(text))
 output=newstrassen(matrix1,matrix2,2**13)
 for i in range(n):
