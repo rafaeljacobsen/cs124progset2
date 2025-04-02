@@ -1,30 +1,19 @@
 import numpy as np
 import sys
 
-def genarraye(e):
-    return np.random.choice([0,1],[e,e])
 
-
+#standard multiplication, $n^3$
 def normalmult(M1, M2):
-    n=np.shape(M1)[0]
-    output = np.zeros((n,n))
+    n=np.shape(M1)[0] # dimension of M1
+    output = np.zeros((n,n)) # init output matrix to 0
     for i in range(n):
         for j in range(n):
-            a=M1[i, j]
+            a=M1[i, j] # take one entry of M1 at a time for optimization
             for k in range(n):
                 output[i, k] += a * M2[j, k]
     return output
 
 
-def normalmult(M1, M2):
-    n=np.shape(M1)[0]
-    output = np.zeros((n,n))
-    for i in range(n):
-        for j in range(n):
-            a=M1[i, j]
-            for k in range(n):
-                output[i, k] += a * M2[j, k]
-    return output
 def newstrassen(matrix1,matrix2,cutoff):
     if np.shape(matrix1)[0]==1:
         return matrix1*matrix2
@@ -39,7 +28,8 @@ def newstrassen(matrix1,matrix2,cutoff):
         M1=np.pad(M1, ((0,1), (0,1)), mode='constant')
         M2=np.pad(M2, ((0,1), (0,1)), mode='constant')
     half=np.shape(M1)[0]//2
-
+    
+    # block matrices (submatrices)
     A=M1[:half,:half]
     B=M1[:half,half:]
     C=M1[half:,:half]
@@ -48,10 +38,11 @@ def newstrassen(matrix1,matrix2,cutoff):
     F=M2[:half,half:]
     G=M2[half:,:half]
     H=M2[half:,half:]
-
+    
     temp1=np.zeros((half,half))
     temp2=np.zeros((half,half))
     
+    # seven matrices (subtasks of divide and combine)
     np.subtract(F,H,out=temp1)
     P1=newstrassen(A,temp1,cutoff)
     np.add(A,B,out=temp1)
@@ -70,7 +61,7 @@ def newstrassen(matrix1,matrix2,cutoff):
     np.add(E,F,out=temp2)
     P7=newstrassen(temp1,temp2,cutoff)
 
-
+    # Combine
     output=np.zeros((2*half,2*half))
     np.add(P4,P5,out=temp1)
     np.add(temp1,P6,out=temp2)
@@ -83,10 +74,11 @@ def newstrassen(matrix1,matrix2,cutoff):
 
 
     if odd:
-        return output[:-1,:-1]
+        return output[:-1,:-1] # remove padding
     else:
         return output
 
+#reads input
 n=int(sys.argv[2])
 filename=sys.argv[3]
 matrix1=np.zeros((n,n))
@@ -100,7 +92,8 @@ for i in range(n):
 for i in range(n):
     for j in range(n):
         matrix2[j,i]=int(numbers[n**2+i+n*j])
+
+#multiplies matrices, cutoff of 16
 output=newstrassen(matrix1,matrix2,16)
 for i in range(n):
     print(int(output[i,i]))
-#print(1)
